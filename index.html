@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Document Pro - Professional photo and document optimizer for passports, visas, and more. Easy, fast, and reliable.">
-    <meta name="keywords" content="document optimizer, passport photo, visa photo, photo editing, professional documents">
+    <meta name="description" content="Document Pro - AI-powered photo and document optimizer for passports, visas, and more.">
+    <meta name="keywords" content="document optimizer, passport photo, visa photo, AI photo editing, professional documents">
     <meta name="author" content="Document Pro">
-    <title>Document Pro - Professional Photo & Document Optimizer</title>
-    <link rel="icon" type="image/png" href="favicon.png"> <!-- Replace with actual favicon -->
-    <link rel="stylesheet" href="style.css">
+    <title>Document Pro - AI-Powered Photo & Document Optimizer</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <!-- Hero Section -->
         <section class="hero">
-            <h1>Create Perfect Documents in Seconds</h1>
-            <p>Optimize your photos and documents for passports, visas, and more with ease.</p>
-            <button class="btn" onclick="scrollToSignIn()">Get Started Now</button>
+            <h1>AI-Powered Document Perfection</h1>
+            <p>Create professional photos and documents for passports, visas, and more in seconds with AI.</p>
+            <div class="hero-buttons">
+                <button class="btn primary-btn" onclick="scrollToSignIn()">Get Started</button>
+                <button class="btn secondary-btn" onclick="scrollToUpload()">Try Free Now</button>
+            </div>
         </section>
 
         <!-- Sign In Section -->
         <section class="header" id="signIn">
             <h2>📄 Document Pro</h2>
-            <p>Sign in to optimize your professional photos and documents</p>
-
-            <div id="signInSection" style="margin-top: 20px;">
+            <p>Sign in to unlock advanced AI features and unlimited document processing.</p>
+            <div id="signInSection" class="login-section">
                 <!-- Google Sign In -->
                 <div id="g_id_onload"
                      data-client_id="YOUR_GOOGLE_CLIENT_ID"
@@ -41,39 +43,35 @@
                      data-size="large"
                      data-logo_alignment="left">
                 </div>
-
                 <!-- Email/Password Login -->
                 <div class="login-form">
                     <input type="email" id="emailInput" placeholder="Email" required aria-label="Email">
                     <input type="password" id="passwordInput" placeholder="Password" required aria-label="Password">
-                    <button class="btn" onclick="handleEmailSignIn()">Sign In with Email</button>
+                    <button class="btn primary-btn" onclick="handleEmailSignIn()">Sign In</button>
                 </div>
             </div>
-
             <!-- User Info -->
             <div id="userInfo" style="display: none; margin-top: 20px;">
-                <img id="userPhoto" style="width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;" alt="User Profile">
+                <img id="userPhoto" class="user-photo" alt="User Profile">
                 <span id="userName"></span>
-                <button onclick="signOut()" style="margin-left: 15px; background: #10a37f; color: white; padding: 5px 15px; border-radius: 15px; cursor: pointer;">Sign Out</button>
+                <button onclick="signOut()" class="btn secondary-btn">Sign Out</button>
             </div>
-
             <!-- Usage Info -->
-            <div id="usageInfo" style="display: none; margin-top: 15px; background: #f8f9ff; padding: 15px; border-radius: 10px;">
-                <p id="usageText" style="margin: 0; font-size: 0.9rem;"></p>
+            <div id="usageInfo" class="usage-info" style="display: none;">
+                <p id="usageText"></p>
             </div>
         </section>
 
-        <!-- Main Card (Upload Section) -->
-        <section class="main-card" id="mainCard" style="display: none;">
+        <!-- Upload Section -->
+        <section class="main-card" id="uploadSection">
             <div class="upload-section">
                 <div class="upload-zone" id="uploadZone">
                     <div class="upload-icon">📁</div>
-                    <h3>Drop your photo here or click to browse</h3>
+                    <h3>Drop your photo or click to browse</h3>
                     <p>Supports JPG, PNG, PDF files up to 10MB</p>
                 </div>
                 <input type="file" id="fileInput" accept="image/*,.pdf" style="display: none;" aria-label="Upload file">
             </div>
-
             <div class="country-selection">
                 <h3>Select Application Type:</h3>
                 <select id="countrySelect" aria-label="Select application type">
@@ -87,496 +85,157 @@
                     <option value="cv">CV/Resume Photo (40x50mm)</option>
                     <option value="linkedin">LinkedIn Profile (400x400px)</option>
                 </select>
-
                 <div class="specs-display" id="specsDisplay" style="display: none;">
                     <h4>Specifications:</h4>
                     <p id="specsText"></p>
                 </div>
             </div>
-
-            <div class="processing" id="processing">
-                <h3>Processing your document...</h3>
+            <div class="processing" id="processing" style="display: none;">
+                <h3>Processing with AI...</h3>
                 <div class="progress-bar">
                     <div class="progress-fill" id="progressFill"></div>
                 </div>
-                <p>Optimizing image according to specifications</p>
+                <p>Optimizing image with AI enhancements</p>
             </div>
-
-            <div class="preview-section" id="previewSection">
+            <div class="preview-section" id="previewSection" style="display: none;">
                 <h3>Preview Result:</h3>
                 <div class="preview-grid" id="previewGrid"></div>
+                <button class="btn primary-btn" id="downloadBtn">📥 Download Optimized File</button>
             </div>
+            <button class="btn primary-btn" id="processBtn" disabled>🚀 Optimize with AI</button>
+        </section>
 
-            <div class="button-row">
-                <button class="btn" id="processBtn" disabled>Process</button>
-                <button class="btn" id="downloadBtn" disabled>Download</button>
+        <!-- Customer Reviews Section -->
+        <section class="reviews-section">
+            <h2>Trusted by Thousands</h2>
+            <p>Our AI-powered tool delivers professional results every time.</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The AI optimization is incredible! My passport photo was perfect in seconds."</p>
+                    <p class="author">Emma T., USA</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Super easy to use, and the AI background removal is spot-on!"</p>
+                    <p class="author">Liam R., UK</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★☆</div>
+                    <p>"Great for LinkedIn photos. The AI made my profile stand out."</p>
+                    <p class="author">Aisha K., India</p>
+                </div>
             </div>
         </section>
 
         <!-- Pricing Section -->
-        <section class="header">
-            <h2>Pricing</h2>
-            <div class="pricing">
+        <section class="pricing-section">
+            <h2>Choose Your Plan</h2>
+            <p>Unlock advanced AI features with our premium plans.</p>
+            <div class="pricing-grid">
                 <div class="pricing-card">
-                    <h3>Free Plan</h3>
-                    <div class="price">$0<span style="font-size: 1rem;">/month</span></div>
+                    <h3>Starter</h3>
+                    <div class="price">$49<span>/month</span></div>
                     <ul class="features">
-                        <li>1 document/day</li>
-                        <li>Basic formats</li>
-                        <li>Standard processing</li>
+                        <li>50 documents/month</li>
+                        <li>Basic AI optimization</li>
+                        <li>Standard formats</li>
+                        <li>Email support</li>
                     </ul>
-                    <button class="btn" onclick="selectPlan('free')">Select</button>
+                    <button class="btn primary-btn" onclick="selectPlan('starter')">Choose Starter</button>
                 </div>
-                <div class="pricing-card">
-                    <h3>Pro Plan</h3>
-                    <div class="price">$9.99<span style="font-size: 1rem;">/month</span></div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Pro</h3>
+                    <div class="price">$299<span>/month</span></div>
                     <ul class="features">
-                        <li>100 documents/month</li>
-                        <li>All formats</li>
+                        <li>500 documents/month</li>
+                        <li>Advanced AI optimization</li>
+                        <li>GPT API integration</li>
                         <li>Batch processing</li>
                         <li>Priority support</li>
                     </ul>
-                    <button class="btn" onclick="selectPlan('pro')">Upgrade Now</button>
+                    <button class="btn primary-btn" onclick="selectPlan('pro')">Choose Pro</button>
                 </div>
                 <div class="pricing-card">
-                    <h3>Business</h3>
-                    <div class="price">$29.99<span style="font-size: 1rem;">/month</span></div>
+                    <h3>Enterprise</h3>
+                    <div class="price">$499<span>/month</span></div>
                     <ul class="features">
                         <li>Unlimited documents</li>
-                        <li>Team features</li>
+                        <li>Custom AI models</li>
+                        <li>Team collaboration</li>
                         <li>API access</li>
                         <li>24/7 support</li>
                     </ul>
-                    <button class="btn" onclick="selectPlan('business')">Contact Sales</button>
+                    <button class="btn primary-btn" onclick="selectPlan('enterprise')">Contact Sales</button>
                 </div>
-            </div>
-            <div style="text-align: center; margin-top: 30px;">
-                <p>Try Document Pro free for 7 days, then upgrade to unlock full access!</p>
-            </div>
-        </section>
-
-        <!-- Gallery Section -->
-        <section class="header">
-            <h2>Gallery</h2>
-            <div style="text-align: center; margin-top: 20px;">
-                <p>See the difference Document Pro can make to your photos and documents.</p>
-            </div>
-            <div class="gallery-grid">
-                <img src="example1.jpg" alt="Example 1">
-                <img src="example2.jpg" alt="Example 2">
-                <img src="example3.jpg" alt="Example 3">
-                <img src="example4.jpg" alt="Example 4">
             </div>
         </section>
 
         <!-- Limit Reached Modal -->
-        <div id="limitReachedModal" class="modal">
-            <div class="modal-overlay"></div>
-            <div class="modal-content">
-                <h3>Daily Limit Reached</h3>
-                <p>You have reached the maximum number of documents for today.</p>
-                <div class="pricing-grid">
-                    <div class="pricing-card">
-                        <h3>Pro Plan</h3>
-                        <div class="price">$9.99<span style="font-size: 1rem;">/month</span></div>
-                        <ul class="features">
-                            <li>100 documents/month</li>
-                            <li>All formats</li>
-                            <li>Batch processing</li>
-                            <li>Priority support</li>
-                        </ul>
-                        <button class="btn" onclick="selectPlan('pro')">Upgrade Now</button>
-                    </div>
-                    <div class="pricing-card">
-                        <h3>Business</h3>
-                        <div class="price">$29.99<span style="font-size: 1rem;">/month</span></div>
-                        <ul class="features">
-                            <li>Unlimited documents</li>
-                            <li>Team features</li>
-                            <li>API access</li>
-                            <li>24/7 support</li>
-                        </ul>
-                        <button class="btn" onclick="selectPlan('business')">Contact Sales</button>
-                    </div>
+        <div class="modal" id="limitReachedModal">
+            <div class="modal-overlay" onclick="closeLimitModal()"></div>
+            <h2>🚀 Upgrade to Continue</h2>
+            <p>You've reached your free limit! Upgrade to process more documents.</p>
+            <div class="modal-grid">
+                <div class="pricing-card">
+                    <h3>Pro</h3>
+                    <div class="price">$299<span>/month</span></div>
+                    <ul class="features">
+                        <li>500 documents/month</li>
+                        <li>Advanced AI optimization</li>
+                        <li>GPT API integration</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn primary-btn" onclick="selectPlan('pro')">Upgrade Now</button>
                 </div>
-                <button onclick="closeLimitModal()" style="margin-top: 20px; background: #ccc; color: #666; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Maybe Later</button>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$499<span>/month</span></div>
+                    <ul class="features">
+                        <li>Unlimited documents</li>
+                        <li>Custom AI models</li>
+                        <li>API access</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <button class="btn primary-btn" onclick="selectPlan('enterprise')">Contact Sales</button>
+                </div>
             </div>
+            <button class="btn secondary-btn" onclick="closeLimitModal()">Maybe Later</button>
         </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-grid">
+                <div>
+                    <h4>About Document Pro</h4>
+                    <p>Document Pro uses AI to create professional photos and documents instantly.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#signIn">Sign In</a></li>
+                        <li><a href="/terms.html">Terms of Service</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Email: support@documentpro.com</li>
+                        <li>Phone: +1-800-123-4567</li>
+                        <li><a href="https://twitter.com/documentpro">Twitter</a></li>
+                        <li><a href="https://facebook.com/documentpro">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>© 2025 Document Pro. All rights reserved.</p>
+        </footer>
     </div>
 
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script src="https://js.stripe.com/v3/"></script>
-    <script>
-        // Replace with your Firebase configuration
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        let currentUser = null;
-        let currentPlan = 'free';
-        let dailyUsage = 0;
-
-        const signInSection = document.getElementById('signInSection');
-        const userInfo = document.getElementById('userInfo');
-        const userPhoto = document.getElementById('userPhoto');
-        const userName = document.getElementById('userName');
-        const usageInfo = document.getElementById('usageInfo');
-        const usageText = document.getElementById('usageText');
-        const mainCard = document.getElementById('mainCard');
-        const uploadZone = document.getElementById('uploadZone');
-        const fileInput = document.getElementById('fileInput');
-        const countrySelect = document.getElementById('countrySelect');
-        const specsDisplay = document.getElementById('specsDisplay');
-        const specsText = document.getElementById('specsText');
-        const processBtn = document.getElementById('processBtn');
-        const processing = document.getElementById('processing');
-        const progressFill = document.getElementById('progressFill');
-        const previewSection = document.getElementById('previewSection');
-        const previewGrid = document.getElementById('previewGrid');
-        const downloadBtn = document.getElementById('downloadBtn');
-
-        function scrollToSignIn() {
-            document.getElementById('signIn').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function handleSignIn(response) {
-            const credential = firebase.auth.GoogleAuthProvider.credential(response.credential);
-            auth.signInWithCredential(credential)
-                .then(result => {
-                    currentUser = result.user;
-                    loadUserInfo();
-                })
-                .catch(error => {
-                    console.error('Authentication error:', error);
-                });
-        }
-
-        function handleEmailSignIn() {
-            const email = document.getElementById('emailInput').value;
-            const password = document.getElementById('passwordInput').value;
-
-            auth.signInWithEmailAndPassword(email, password)
-                .then(result => {
-                    currentUser = result.user;
-                    loadUserInfo();
-                })
-                .catch(error => {
-                    console.error('Authentication error:', error);
-                    alert('Sign in failed. Please check your credentials.');
-                });
-        }
-
-        function loadUserInfo() {
-            if (currentUser) {
-                userPhoto.src = currentUser.photoURL || 'default-avatar.png';
-                userName.textContent = currentUser.displayName || currentUser.email;
-                signInSection.style.display = 'none';
-                userInfo.style.display = 'flex';
-                loadUsageInfo();
-            }
-        }
-
-        function loadUsageInfo() {
-            const usageData = JSON.parse(localStorage.getItem(`usage_${currentUser.id}`)) || {};
-            const today = new Date().toDateString();
-
-            if (usageData.date !== today) {
-                dailyUsage = 0;
-            } else {
-                dailyUsage = usageData.count || 0;
-            }
-
-            usageText.textContent = `Documents processed today: ${dailyUsage}`;
-            usageInfo.style.display = 'block';
-            mainCard.style.display = 'block';
-        }
-
-        function signOut() {
-            auth.signOut().then(() => {
-                currentUser = null;
-                signInSection.style.display = 'block';
-                userInfo.style.display = 'none';
-                usageInfo.style.display = 'none';
-                mainCard.style.display = 'none';
-            }).catch(error => {
-                console.error('Sign-out error:', error);
-            });
-        }
-
-        function handleCountryChange() {
-            const value = countrySelect.value;
-            specsDisplay.style.display = value ? 'block' : 'none';
-            if (!value) {
-                processBtn.disabled = true;
-                specsText.textContent = '';
-                return;
-            }
-
-            const specs = getSpecs(value);
-            specsText.textContent = `
-                ${specs.width}x${specs.height} ${specs.unit} at ${specs.dpi} DPI
-                - Background: ${specs.background}
-            `;
-            processBtn.disabled = false;
-        }
-
-        function getSpecs(type) {
-            switch (type) {
-                case 'passport':
-                    return { width: 35, height: 45, unit: 'mm', dpi: 300, background: 'white' };
-                case 'id':
-                    return { width: 25, height: 35, unit: 'mm', dpi: 300, background: 'white' };
-                case 'visa-us':
-                    return { width: 51, height: 51, unit: 'mm', dpi: 300, background: 'white' };
-                case 'visa-uk':
-                    return { width: 45, height: 35, unit: 'mm', dpi: 300, background: 'white' };
-                case 'visa-canada':
-                    return { width: 35, height: 45, unit: 'mm', dpi: 300, background: 'white' };
-                case 'visa-australia':
-                    return { width: 45, height: 35, unit: 'mm', dpi: 300, background: 'white' };
-                case 'cv':
-                    return { width: 40, height: 50, unit: 'mm', dpi: 300, background: 'light' };
-                case 'linkedin':
-                    return { width: 400, height: 400, unit: 'px', dpi: 72, background: 'any' };
-                default:
-                    return { width: 0, height: 0, unit: 'mm', dpi: 300, background: 'white' };
-            }
-        }
-
-        function processFile() {
-            if (!checkUsageLimit()) {
-                return;
-            }
-
-            const file = fileInput.files[0];
-            if (!file) {
-                alert('Please select a file first.');
-                return;
-            }
-
-            const specs = getSpecs(countrySelect.value);
-            processing.style.display = 'block';
-            progressFill.style.width = '0%';
-
-            fakeProcess(file, specs).then(result => {
-                processing.style.display = 'none';
-                progressFill.style.width = '0%';
-
-                processedFile = result;
-                showPreview();
-                incrementUsage();
-            }).catch(error => {
-                console.error('Processing error:', error);
-                alert('Failed to process the file. Please try again.');
-                processing.style.display = 'none';
-                progressFill.style.width = '0%';
-            });
-        }
-
-        function fakeProcess(file, specs) {
-            return new Promise(resolve => {
-                progressFill.style.width = '100%';
-
-                setTimeout(() => {
-                    const canvas = document.createElement('canvas');
-                    const ctx = canvas.getContext('2d');
-                    const img = new Image();
-
-                    img.onload = function() {
-                        const pixelWidth = specs.unit === 'mm' ?
-                            (specs.width * specs.dpi) / 25.4 : specs.width;
-                        const pixelHeight = specs.unit === 'mm' ?
-                            (specs.height * specs.dpi) / 25.4 : specs.height;
-
-                        canvas.width = pixelWidth;
-                        canvas.height = pixelHeight;
-
-                        if (specs.background === 'white') {
-                            ctx.fillStyle = '#FFFFFF';
-                        } else if (specs.background === 'neutral') {
-                            ctx.fillStyle = '#F0F0F0';
-                        } else if (specs.background === 'light') {
-                            ctx.fillStyle = '#F8F8F8';
-                        }
-
-                        if (specs.background !== 'any') {
-                            ctx.fillRect(0, 0, canvas.width, canvas.height);
-                        }
-
-                        const scale = Math.max(
-                            canvas.width / img.width,
-                            canvas.height / img.height
-                        );
-
-                        const scaledWidth = img.width * scale;
-                        const scaledHeight = img.height * scale;
-                        const x = (canvas.width - scaledWidth) / 2;
-                        const y = (canvas.height - scaledHeight) / 2;
-
-                        ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
-
-                        canvas.toBlob((blob) => {
-                            resolve({
-                                name: file.name.replace(/\.[^/.]+$/, '_optimized.jpg'),
-                                blob: blob,
-                                url: URL.createObjectURL(blob),
-                                originalName: file.name
-                            });
-                        }, 'image/jpeg', 0.9);
-                    };
-
-                    img.src = URL.createObjectURL(file);
-                }, 1000);
-            });
-        }
-
-        function showPreview() {
-            previewGrid.innerHTML = '';
-
-            const previewCard = document.createElement('div');
-            previewCard.className = 'preview-card';
-            previewCard.innerHTML = `
-                <h4>Before</h4>
-                <img src="${URL.createObjectURL(selectedFile)}" alt="Original">
-                <h4 style="margin-top: 20px;">After</h4>
-                <img src="${processedFile.url}" alt="Optimized">
-                <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
-                    ${processedFile.name}
-                </p>
-            `;
-            previewGrid.appendChild(previewCard);
-
-            previewSection.style.display = 'block';
-            processBtn.disabled = false;
-        }
-
-        function downloadFile() {
-            const a = document.createElement('a');
-            a.href = processedFile.url;
-            a.download = processedFile.name;
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-        }
-
-        function selectPlan(plan) {
-            if (plan === 'free') {
-                alert('You are now using the free plan! Process 1 document per day.');
-                return;
-            }
-
-            if (plan === 'business') {
-                alert('Please contact sales@documentpro.com for business inquiries.');
-                return;
-            }
-
-            if (plan === 'pro') {
-                if (!currentUser) {
-                    alert('Please sign in first to upgrade your plan.');
-                    return;
-                }
-
-                const priceId = 'price_1234567890'; // Replace with your price ID
-
-                stripe.redirectToCheckout({
-                    lineItems: [{
-                        price: priceId,
-                        quantity: 1,
-                    }],
-                    mode: 'subscription',
-                    customerEmail: currentUser.email,
-                    successUrl: window.location.origin + '/success.html',
-                    cancelUrl: window.location.origin + '/cancel.html',
-                }).then(function (result) {
-                    if (result.error) {
-                        alert('Payment failed: ' + result.error.message);
-                    }
-                });
-            }
-        }
-
-        const selectedFile = null;
-        let processedFile = null;
-
-        const today = new Date().toDateString();
-        let usageData = JSON.parse(localStorage.getItem(`usage_${currentUser?.id}`)) || {};
-        if (usageData.date !== today) {
-            dailyUsage = 0;
-        } else {
-            dailyUsage = usageData.count || 0;
-        }
-
-        function incrementUsage() {
-            dailyUsage += 1;
-            usageText.textContent = `Documents processed today: ${dailyUsage}`;
-            const usageData = {
-                date: today,
-                count: dailyUsage
-            };
-            localStorage.setItem(`usage_${currentUser.id}`, JSON.stringify(usageData));
-        }
-
-        function checkUsageLimit() {
-            if (currentPlan === 'free' && dailyUsage >= 1) {
-                const modal = document.getElementById('limitReachedModal');
-                modal.style.display = 'block';
-                requestAnimationFrame(() => modal.classList.add('show'));
-                return false;
-            }
-            return true;
-        }
-
-        function closeLimitModal() {
-            const modal = document.getElementById('limitReachedModal');
-            modal.classList.remove('show');
-            setTimeout(() => { modal.style.display = 'none'; }, 300);
-        }
-
-        // Event listeners
-        uploadZone.addEventListener('click', () => fileInput.click());
-        uploadZone.addEventListener('dragover', handleDragOver);
-        uploadZone.addEventListener('drop', handleDrop);
-        uploadZone.addEventListener('dragleave', handleDragLeave);
-        fileInput.addEventListener('change', handleFileSelect);
-        countrySelect.addEventListener('change', handleCountryChange);
-        processBtn.addEventListener('click', processFile);
-        downloadBtn.addEventListener('click', downloadFile);
-
-        function handleDragOver(e) {
-            e.preventDefault();
-            uploadZone.classList.add('dragover');
-        }
-
-        function handleDrop(e) {
-            e.preventDefault();
-            uploadZone.classList.remove('dragover');
-            const files = e.dataTransfer.files;
-            fileInput.files = files;
-        }
-
-        function handleDragLeave() {
-            uploadZone.classList.remove('dragover');
-        }
-
-        function handleFileSelect() {
-            const files = fileInput.files;
-            if (!files.length) {
-                return;
-            }
-            selectedFile = files[0];
-            processBtn.disabled = false;
-        }
-
-        window.addEventListener('load', function() {
-            console.log('Document Pro initialized successfully!');
-        });
-    </script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="script.js"></script>
 </body>
 </html>
