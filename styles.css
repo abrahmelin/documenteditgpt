@@ -1,0 +1,1273 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a1a;
+    min-height: 100vh;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Buttons */
+.btn {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+}
+
+.secondary-btn {
+    background: #374151;
+    color: #ffffff;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Header Section */
+.header {
+    background: #262626;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.header h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1.1rem;
+    color: #9ca3af;
+}
+
+/* Login Form */
+.login-section {
+    margin-top: 20px;
+}
+
+.login-form {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.6s ease-out;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    background: #1f1f1f;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.login-form input::placeholder {
+    color: #6b7280;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.user-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Usage Info */
+.usage-info {
+    background: #2d2d2d;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 15px;
+    text-align: center;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.usage-info p {
+    font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+/* Main Card */
+.main-card {
+    background: #262626;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.upload-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.upload-zone {
+    border: 2px dashed #10b981;
+    border-radius: 12px;
+    padding: 40px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #2d2d2d;
+}
+
+.upload-zone:hover {
+    border-color: #06b6d4;
+    background: #374151;
+    transform: scale(1.02);
+}
+
+.upload-zone.dragover {
+    border-color: #06b6d4;
+    background: #374151;
+    transform: scale(1.02);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: #10b981;
+    margin-bottom: 15px;
+}
+
+.country-selection h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    background: #1f1f1f;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.specs-display {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border-left: 4px solid #10b981;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.processing {
+    text-align: center;
+    padding: 40px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #4b5563;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #06b6d4);
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.preview-section {
+    margin-top: 30px;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.preview-card {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.6s ease-out;
+}
+
+.preview-card img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Reviews Section */
+.reviews-section {
+    background: #262626;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.review-card {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: left;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.review-card p {
+    font-size: 0.95rem;
+    color: #9ca3af;
+    margin-bottom: 10px;
+}
+
+.review-card .author {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.review-card .stars {
+    color: #f59e0b;
+    margin-bottom: 10px;
+}
+
+/* Pricing Section */
+.pricing-section {
+    background: #262626;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.pricing-card {
+    background: #2d2d2d;
+    border: 1px solid #4b5563;
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+    border-color: #10b981;
+    transform: translateY(-5px);
+}
+
+.pricing-card.popular {
+    border-color: #10b981;
+    transform: scale(1.05);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #10b981;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.price {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #10b981;
+    margin: 10px 0;
+}
+
+.price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #9ca3af;
+}
+
+.features {
+    list-style: none;
+    margin: 20px 0;
+}
+
+.features li {
+    padding: 8px 0;
+    color: #9ca3af;
+}
+
+.features li:before {
+    content: "✓";
+    color: #10b981;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    max-width: 600px;
+    background: #262626;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    animation: scaleIn 0.3s ease-out;
+}
+
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Footer */
+.footer {
+    background: #1f1f1f;
+    color: #9ca3af;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.footer-grid h4 {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.footer-grid ul {
+    list-style: none;
+}
+
+.footer-grid ul li {
+    margin: 10px 0;
+}
+
+.footer-grid ul li a {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-grid ul li a:hover {
+    color: #10b981;
+}
+
+.footer p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-buttons /
+
+System: I'm sorry, but the response was cut off due to length constraints. Let me provide the complete, updated code with all the requested features, ensuring it's ready for deployment. I'll include the JavaScript file (`script.js`) as well, since it was referenced in the HTML. The code will incorporate the ChatGPT-inspired design, iOS-like animations, a free trial upload feature, AI enhancements, and the pricing structure you requested ($49, $299, $499/month). I'll also ensure no functionality is lost and all features are polished.
+
+### HTML (`index.html`)
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Document Pro - AI-powered photo and document optimizer for passports, visas, and more.">
+    <meta name="keywords" content="document optimizer, passport photo, visa photo, AI photo editing, professional documents">
+    <meta name="author" content="Document Pro">
+    <title>Document Pro - AI-Powered Photo & Document Optimizer</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h1>AI-Powered Document Perfection</h1>
+            <p>Create professional photos and documents for passports, visas, and more in seconds with AI.</p>
+            <div class="hero-buttons">
+                <button class="btn primary-btn" onclick="scrollToSignIn()">Get Started</button>
+                <button class="btn secondary-btn" onclick="scrollToUpload()">Try Free Now</button>
+            </div>
+        </section>
+
+        <!-- Sign In Section -->
+        <section class="header" id="signIn">
+            <h2>📄 Document Pro</h2>
+            <p>Sign in to unlock advanced AI features and unlimited document processing.</p>
+            <div id="signInSection" class="login-section">
+                <!-- Google Sign In -->
+                <div id="g_id_onload"
+                     data-client_id="YOUR_GOOGLE_CLIENT_ID"
+                     data-context="signin"
+                     data-ux_mode="popup"
+                     data-callback="handleSignIn"
+                     data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin"
+                     data-type="standard"
+                     data-shape="pill"
+                     data-theme="outline"
+                     data-text="signin_with"
+                     data-size="large"
+                     data-logo_alignment="left">
+                </div>
+                <!-- Email/Password Login -->
+                <div class="login-form">
+                    <input type="email" id="emailInput" placeholder="Email" required aria-label="Email">
+                    <input type="password" id="passwordInput" placeholder="Password" required aria-label="Password">
+                    <button class="btn primary-btn" onclick="handleEmailSignIn()">Sign In</button>
+                </div>
+            </div>
+            <!-- User Info -->
+            <div id="userInfo" style="display: none; margin-top: 20px;">
+                <img id="userPhoto" class="user-photo" alt="User Profile">
+                <span id="userName"></span>
+                <button onclick="signOut()" class="btn secondary-btn">Sign Out</button>
+            </div>
+            <!-- Usage Info -->
+            <div id="usageInfo" class="usage-info" style="display: none;">
+                <p id="usageText"></p>
+            </div>
+        </section>
+
+        <!-- Upload Section -->
+        <section class="main-card" id="uploadSection">
+            <div class="upload-section">
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">📁</div>
+                    <h3>Drop your photo or click to browse</h3>
+                    <p>Supports JPG, PNG, PDF files up to 10MB</p>
+                </div>
+                <input type="file" id="fileInput" accept="image/*,.pdf" style="display: none;" aria-label="Upload file">
+            </div>
+            <div class="country-selection">
+                <h3>Select Application Type:</h3>
+                <select id="countrySelect" aria-label="Select application type">
+                    <option value="">Choose application type...</option>
+                    <option value="passport">Passport Photo (35x45mm)</option>
+                    <option value="id">ID Card Photo (25x35mm)</option>
+                    <option value="visa-us">US Visa (51x51mm - 2"x2")</option>
+                    <option value="visa-uk">UK Visa (45x35mm)</option>
+                    <option value="visa-canada">Canada Visa (35x45mm)</option>
+                    <option value="visa-australia">Australia Visa (45x35mm)</option>
+                    <option value="cv">CV/Resume Photo (40x50mm)</option>
+                    <option value="linkedin">LinkedIn Profile (400x400px)</option>
+                </select>
+                <div class="specs-display" id="specsDisplay" style="display: none;">
+                    <h4>Specifications:</h4>
+                    <p id="specsText"></p>
+                </div>
+            </div>
+            <div class="processing" id="processing" style="display: none;">
+                <h3>Processing with AI...</h3>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <p>Optimizing image with AI enhancements</p>
+            </div>
+            <div class="preview-section" id="previewSection" style="display: none;">
+                <h3>Preview Result:</h3>
+                <div class="preview-grid" id="previewGrid"></div>
+                <button class="btn primary-btn" id="downloadBtn">📥 Download Optimized File</button>
+            </div>
+            <button class="btn primary-btn" id="processBtn" disabled>🚀 Optimize with AI</button>
+        </section>
+
+        <!-- Customer Reviews Section -->
+        <section class="reviews-section">
+            <h2>Trusted by Thousands</h2>
+            <p>Our AI-powered tool delivers professional results every time.</p>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"The AI optimization is incredible! My passport photo was perfect in seconds."</p>
+                    <p class="author">Emma T., USA</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Super easy to use, and the AI background removal is spot-on!"</p>
+                    <p class="author">Liam R., UK</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars">★★★★☆</div>
+                    <p>"Great for LinkedIn photos. The AI made my profile stand out."</p>
+                    <p class="author">Aisha K., India</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="pricing-section">
+            <h2>Choose Your Plan</h2>
+            <p>Unlock advanced AI features with our premium plans.</p>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="price">$49<span>/month</span></div>
+                    <ul class="features">
+                        <li>50 documents/month</li>
+                        <li>Basic AI optimization</li>
+                        <li>Standard formats</li>
+                        <li>Email support</li>
+                    </ul>
+                    <button class="btn primary-btn" onclick="selectPlan('starter')">Choose Starter</button>
+                </div>
+                <div class="pricing-card popular">
+                    <div class="popular-badge">Most Popular</div>
+                    <h3>Pro</h3>
+                    <div class="price">$299<span>/month</span></div>
+                    <ul class="features">
+                        <li>500 documents/month</li>
+                        <li>Advanced AI optimization</li>
+                        <li>GPT API integration</li>
+                        <li>Batch processing</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn primary-btn" onclick="selectPlan('pro')">Choose Pro</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$499<span>/month</span></div>
+                    <ul class="features">
+                        <li>Unlimited documents</li>
+                        <li>Custom AI models</li>
+                        <li>Team collaboration</li>
+                        <li>API access</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <button class="btn primary-btn" onclick="selectPlan('enterprise')">Contact Sales</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Limit Reached Modal -->
+        <div class="modal" id="limitReachedModal">
+            <div class="modal-overlay" onclick="closeLimitModal()"></div>
+            <h2>🚀 Upgrade to Continue</h2>
+            <p>You've reached your free limit! Upgrade to process more documents.</p>
+            <div class="modal-grid">
+                <div class="pricing-card">
+                    <h3>Pro</h3>
+                    <div class="price">$299<span>/month</span></div>
+                    <ul class="features">
+                        <li>500 documents/month</li>
+                        <li>Advanced AI optimization</li>
+                        <li>GPT API integration</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn primary-btn" onclick="selectPlan('pro')">Upgrade Now</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="price">$499<span>/month</span></div>
+                    <ul class="features">
+                        <li>Unlimited documents</li>
+                        <li>Custom AI models</li>
+                        <li>API access</li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <button class="btn primary-btn" onclick="selectPlan('enterprise')">Contact Sales</button>
+                </div>
+            </div>
+            <button class="btn secondary-btn" onclick="closeLimitModal()">Maybe Later</button>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-grid">
+                <div>
+                    <h4>About Document Pro</h4>
+                    <p>Document Pro uses AI to create professional photos and documents instantly.</p>
+                </div>
+                <div>
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#signIn">Sign In</a></li>
+                        <li><a href="/terms.html">Terms of Service</a></li>
+                        <li><a href="/privacy.html">Privacy Policy</a></li>
+                        <li><a href="/contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>Email: support@documentpro.com</li>
+                        <li>Phone: +1-800-123-4567</li>
+                        <li><a href="https://twitter.com/documentpro">Twitter</a></li>
+                        <li><a href="https://facebook.com/documentpro">Facebook</a></li>
+                    </ul>
+                </div>
+            </div>
+            <p>© 2025 Document Pro. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="script.js"></script>
+</body>
+</html>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #1a1a1a;
+    min-height: 100vh;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    color: white;
+    text-align: center;
+    padding: 80px 20px;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 30px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Buttons */
+.btn {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    color: white;
+    border: none;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+}
+
+.secondary-btn {
+    background: #374151;
+    color: #ffffff;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Header Section */
+.header {
+    background: #262626;
+    padding: 40px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.header h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.header p {
+    font-size: 1.1rem;
+    color: #9ca3af;
+}
+
+/* Login Form */
+.login-section {
+    margin-top: 20px;
+}
+
+.login-form {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.6s ease-out;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    background: #1f1f1f;
+    color: #ffffff;
+    font-size: 1rem;
+}
+
+.login-form input::placeholder {
+    color: #6b7280;
+}
+
+.login-form input:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.user-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+/* Usage Info */
+.usage-info {
+    background: #2d2d2d;
+    padding: 15px;
+    border-radius: 12px;
+    margin-top: 15px;
+    text-align: center;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.usage-info p {
+    font-size: 0.9rem;
+    color: #9ca3af;
+}
+
+/* Main Card */
+.main-card {
+    background: #262626;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.upload-section {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.upload-zone {
+    border: 2px dashed #10b981;
+    border-radius: 12px;
+    padding: 40px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #2d2d2d;
+}
+
+.upload-zone:hover {
+    border-color: #06b6d4;
+    background: #374151;
+    transform: scale(1.02);
+}
+
+.upload-zone.dragover {
+    border-color: #06b6d4;
+    background: #374151;
+    transform: scale(1.02);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: #10b981;
+    margin-bottom: 15px;
+}
+
+.country-selection h3 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    background: #1f1f1f;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: #10b981;
+    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.specs-display {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    border-left: 4px solid #10b981;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.processing {
+    text-align: center;
+    padding: 40px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: #4b5563;
+    border-radius: 3px;
+    overflow: hidden;
+    margin: 20px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #10b981, #06b6d4);
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.preview-section {
+    margin-top: 30px;
+}
+
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.preview-card {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.6s ease-out;
+}
+
+.preview-card img {
+    max-width: 100%;
+    max-height: 250px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Reviews Section */
+.reviews-section {
+    background: #262626;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.review-card {
+    background: #2d2d2d;
+    padding: 20px;
+    border-radius: 12px;
+    text-align: left;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.review-card p {
+    font-size: 0.95rem;
+    color: #9ca3af;
+    margin-bottom: 10px;
+}
+
+.review-card .author {
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.review-card .stars {
+    color: #f59e0b;
+    margin-bottom: 10px;
+}
+
+/* Pricing Section */
+.pricing-section {
+    background: #262626;
+    border-radius: 16px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 40px;
+    animation: fadeIn 0.6s ease-out;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.pricing-card {
+    background: #2d2d2d;
+    border: 1px solid #4b5563;
+    border-radius: 12px;
+    padding: 30px;
+    transition: all 0.3s ease;
+}
+
+.pricing-card:hover {
+    border-color: #10b981;
+    transform: translateY(-5px);
+}
+
+.pricing-card.popular {
+    border-color: #10b981;
+    transform: scale(1.05);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #10b981;
+    color: white;
+    padding: 6px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.price {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #10b981;
+    margin: 10px 0;
+}
+
+.price span {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #9ca3af;
+}
+
+.features {
+    list-style: none;
+    margin: 20px 0;
+}
+
+.features li {
+    padding: 8px 0;
+    color: #9ca3af;
+}
+
+.features li:before {
+    content: "✓";
+    color: #10b981;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    max-width: 600px;
+    background: #262626;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    animation: scaleIn 0.3s ease-out;
+}
+
+.modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+}
+
+.modal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+/* Footer */
+.footer {
+    background: #1f1f1f;
+    color: #9ca3af;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.footer-grid h4 {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    color: #ffffff;
+}
+
+.footer-grid ul {
+    list-style: none;
+}
+
+.footer-grid ul li {
+    margin: 10px 0;
+}
+
+.footer-grid ul li a {
+    color: #9ca3af;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-grid ul li a:hover {
+    color: #10b981;
+}
+
+.footer p {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero h1 {
+        font-size: 2.2rem;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .main-card {
+        padding: 20px;
+    }
+
+    .preview-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-card.popular {
+        transform: none;
+    }
+
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-grid {
+        grid-template-columns: 1fr;
+    }
+}
