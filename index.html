@@ -1134,23 +1134,23 @@
                     alert('Please sign in first to upgrade your plan.');
                     return;
                 }
-                
+
                 const priceId = 'price_1234567890'; // Replace with your price ID
-                
-                stripe.redirectToCheckout({
-                    lineItems: [{
-                        price: priceId,
-                        quantity: 1,
-                    }],
-                    mode: 'subscription',
-                    customerEmail: currentUser.email,
-                    successUrl: window.location.origin + '/success.html',
-                    cancelUrl: window.location.origin + '/cancel.html',
-                }).then(function (result) {
-                    if (result.error) {
-                        alert('Payment failed: ' + result.error.message);
+
+                fetch('/api/create-checkout-session', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ priceId: priceId, email: currentUser.email })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.id) {
+                        stripe.redirectToCheckout({ sessionId: data.id });
+                    } else if (data.error) {
+                        alert('Payment failed: ' + data.error);
                     }
-                });
+                })
+                .catch(err => alert('Payment failed: ' + err.message));
             }
         }
 
