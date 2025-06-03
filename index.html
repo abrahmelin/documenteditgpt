@@ -802,6 +802,7 @@
         let currentPlan = 'free';
         let currentUser = null;
         let dailyUsage = 0;
+        let anonymousUsage = 0;
 
         // Initialize Stripe
         const stripe = Stripe('pk_test_51234567890'); // Replace with your publishable key
@@ -873,7 +874,7 @@
             document.getElementById('signInSection').style.display = 'block';
             document.getElementById('userInfo').style.display = 'none';
             document.getElementById('usageInfo').style.display = 'none';
-            document.getElementById('mainCard').style.display = 'none';
+            document.getElementById('mainCard').style.display = 'block';
             
             uploadZone.innerHTML = `
                 <div class="upload-icon">📁</div>
@@ -923,6 +924,14 @@
                 count: dailyUsage
             };
             localStorage.setItem(`usage_${currentUser.id}`, JSON.stringify(usageData));
+        }
+
+        function loadAnonymousUsage() {
+            anonymousUsage = parseInt(localStorage.getItem('usage_anonymous') || '0', 10);
+        }
+
+        function saveAnonymousUsage() {
+            localStorage.setItem('usage_anonymous', anonymousUsage.toString());
         }
 
         function checkUsageLimit() {
@@ -1008,14 +1017,16 @@
 
         async function processFile() {
             if (!selectedFile || !countrySelect.value) return;
-            
-            if (!currentUser) {
-                alert('Please sign in to process documents');
-                return;
-            }
-            
-            if (!checkUsageLimit()) {
-                return;
+
+            if (currentUser) {
+                if (!checkUsageLimit()) {
+                    return;
+                }
+            } else {
+                if (anonymousUsage >= 1) {
+                    alert('Please sign in or upgrade to process more documents.');
+                    return;
+                }
             }
 
             processing.style.display = 'block';
@@ -1028,11 +1039,17 @@
             processedFile = await processImage(selectedFile, specs);
             
             processing.style.display = 'none';
-            
-            dailyUsage += 1;
-            saveUserUsage();
-            updateUsageDisplay();
-            
+
+            if (currentUser) {
+                dailyUsage += 1;
+                saveUserUsage();
+                updateUsageDisplay();
+            } else {
+                anonymousUsage += 1;
+                saveAnonymousUsage();
+                alert('Sign in or upgrade to process more files.');
+            }
+
             showPreview();
         }
 
@@ -1156,6 +1173,10 @@
 
         window.addEventListener('load', function() {
             console.log('Document Pro initialized successfully!');
+            loadAnonymousUsage();
+            if (!currentUser) {
+                document.getElementById('mainCard').style.display = 'block';
+            }
         });
     </script>
 </body>
