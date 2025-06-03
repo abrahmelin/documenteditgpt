@@ -197,6 +197,11 @@
             margin-top: 30px;
             display: none;
         }
+
+        .ai-enhance label {
+            font-size: 1rem;
+            cursor: pointer;
+        }
         
         .preview-grid {
             display: grid;
@@ -557,7 +562,11 @@
                     <button class="btn" id="downloadBtn">📥 Download Optimized File</button>
                 </div>
             </div>
-            
+
+            <div class="ai-enhance" style="text-align: center; margin-top: 20px;">
+                <label><input type="checkbox" id="aiEnhance"> Apply AI Enhancement</label>
+            </div>
+
             <div style="text-align: center; margin-top: 30px;">
                 <button class="btn" id="processBtn" disabled>🚀 Optimize Document</button>
             </div>
@@ -796,6 +805,7 @@
         const previewSection = document.getElementById('previewSection');
         const previewGrid = document.getElementById('previewGrid');
         const downloadBtn = document.getElementById('downloadBtn');
+        const aiEnhance = document.getElementById('aiEnhance');
 
         let selectedFile = null;
         let processedFile = null;
@@ -1026,6 +1036,10 @@
             progressFill.style.width = '100%';
             
             processedFile = await processImage(selectedFile, specs);
+
+            if (aiEnhance.checked) {
+                processedFile = await enhanceWithAI(processedFile);
+            }
             
             processing.style.display = 'none';
             
@@ -1089,15 +1103,42 @@
             });
         }
 
+        async function enhanceWithAI(fileObj) {
+            const formData = new FormData();
+            formData.append('image', fileObj.blob, fileObj.name);
+
+            try {
+                const response = await fetch('/api/enhance', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Enhancement failed');
+                }
+
+                const blob = await response.blob();
+                return {
+                    name: fileObj.name.replace('_optimized', '_ai'),
+                    blob: blob,
+                    url: URL.createObjectURL(blob),
+                    originalName: fileObj.originalName
+                };
+            } catch (err) {
+                alert('AI enhancement failed. Using optimized image.');
+                return fileObj;
+            }
+        }
+
         function showPreview() {
             previewGrid.innerHTML = '';
-            
+
             const previewCard = document.createElement('div');
             previewCard.className = 'preview-card';
             previewCard.innerHTML = `
                 <h4>Before</h4>
                 <img src="${URL.createObjectURL(selectedFile)}" alt="Original">
-                <h4 style="margin-top: 20px;">After</h4>
+                <h4 style="margin-top: 20px;">${aiEnhance.checked ? 'After (AI)' : 'After'}</h4>
                 <img src="${processedFile.url}" alt="Optimized">
                 <p style="margin-top: 10px; font-size: 0.9rem; color: #666;">
                     ${processedFile.name}
