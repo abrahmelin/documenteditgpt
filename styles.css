@@ -494,250 +494,36 @@ select:focus {
         font-size: 2.2rem;
     }
 
-    .hero-buttons /
+    .hero-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
 
-System: I'm sorry, but the response was cut off due to length constraints. Let me provide the complete, updated code with all the requested features, ensuring it's ready for deployment. I'll include the JavaScript file (`script.js`) as well, since it was referenced in the HTML. The code will incorporate the ChatGPT-inspired design, iOS-like animations, a free trial upload feature, AI enhancements, and the pricing structure you requested ($49, $299, $499/month). I'll also ensure no functionality is lost and all features are polished.
+    .main-card {
+        padding: 20px;
+    }
 
-### HTML (`index.html`)
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Document Pro - AI-powered photo and document optimizer for passports, visas, and more.">
-    <meta name="keywords" content="document optimizer, passport photo, visa photo, AI photo editing, professional documents">
-    <meta name="author" content="Document Pro">
-    <title>Document Pro - AI-Powered Photo & Document Optimizer</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Hero Section -->
-        <section class="hero">
-            <h1>AI-Powered Document Perfection</h1>
-            <p>Create professional photos and documents for passports, visas, and more in seconds with AI.</p>
-            <div class="hero-buttons">
-                <button class="btn primary-btn" onclick="scrollToSignIn()">Get Started</button>
-                <button class="btn secondary-btn" onclick="scrollToUpload()">Try Free Now</button>
-            </div>
-        </section>
+    .preview-grid {
+        grid-template-columns: 1fr;
+    }
 
-        <!-- Sign In Section -->
-        <section class="header" id="signIn">
-            <h2>📄 Document Pro</h2>
-            <p>Sign in to unlock advanced AI features and unlimited document processing.</p>
-            <div id="signInSection" class="login-section">
-                <!-- Google Sign In -->
-                <div id="g_id_onload"
-                     data-client_id="YOUR_GOOGLE_CLIENT_ID"
-                     data-context="signin"
-                     data-ux_mode="popup"
-                     data-callback="handleSignIn"
-                     data-auto_prompt="false">
-                </div>
-                <div class="g_id_signin"
-                     data-type="standard"
-                     data-shape="pill"
-                     data-theme="outline"
-                     data-text="signin_with"
-                     data-size="large"
-                     data-logo_alignment="left">
-                </div>
-                <!-- Email/Password Login -->
-                <div class="login-form">
-                    <input type="email" id="emailInput" placeholder="Email" required aria-label="Email">
-                    <input type="password" id="passwordInput" placeholder="Password" required aria-label="Password">
-                    <button class="btn primary-btn" onclick="handleEmailSignIn()">Sign In</button>
-                </div>
-            </div>
-            <!-- User Info -->
-            <div id="userInfo" style="display: none; margin-top: 20px;">
-                <img id="userPhoto" class="user-photo" alt="User Profile">
-                <span id="userName"></span>
-                <button onclick="signOut()" class="btn secondary-btn">Sign Out</button>
-            </div>
-            <!-- Usage Info -->
-            <div id="usageInfo" class="usage-info" style="display: none;">
-                <p id="usageText"></p>
-            </div>
-        </section>
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
 
-        <!-- Upload Section -->
-        <section class="main-card" id="uploadSection">
-            <div class="upload-section">
-                <div class="upload-zone" id="uploadZone">
-                    <div class="upload-icon">📁</div>
-                    <h3>Drop your photo or click to browse</h3>
-                    <p>Supports JPG, PNG, PDF files up to 10MB</p>
-                </div>
-                <input type="file" id="fileInput" accept="image/*,.pdf" style="display: none;" aria-label="Upload file">
-            </div>
-            <div class="country-selection">
-                <h3>Select Application Type:</h3>
-                <select id="countrySelect" aria-label="Select application type">
-                    <option value="">Choose application type...</option>
-                    <option value="passport">Passport Photo (35x45mm)</option>
-                    <option value="id">ID Card Photo (25x35mm)</option>
-                    <option value="visa-us">US Visa (51x51mm - 2"x2")</option>
-                    <option value="visa-uk">UK Visa (45x35mm)</option>
-                    <option value="visa-canada">Canada Visa (35x45mm)</option>
-                    <option value="visa-australia">Australia Visa (45x35mm)</option>
-                    <option value="cv">CV/Resume Photo (40x50mm)</option>
-                    <option value="linkedin">LinkedIn Profile (400x400px)</option>
-                </select>
-                <div class="specs-display" id="specsDisplay" style="display: none;">
-                    <h4>Specifications:</h4>
-                    <p id="specsText"></p>
-                </div>
-            </div>
-            <div class="processing" id="processing" style="display: none;">
-                <h3>Processing with AI...</h3>
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill"></div>
-                </div>
-                <p>Optimizing image with AI enhancements</p>
-            </div>
-            <div class="preview-section" id="previewSection" style="display: none;">
-                <h3>Preview Result:</h3>
-                <div class="preview-grid" id="previewGrid"></div>
-                <button class="btn primary-btn" id="downloadBtn">📥 Download Optimized File</button>
-            </div>
-            <button class="btn primary-btn" id="processBtn" disabled>🚀 Optimize with AI</button>
-        </section>
+    .pricing-card.popular {
+        transform: none;
+    }
 
-        <!-- Customer Reviews Section -->
-        <section class="reviews-section">
-            <h2>Trusted by Thousands</h2>
-            <p>Our AI-powered tool delivers professional results every time.</p>
-            <div class="reviews-grid">
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"The AI optimization is incredible! My passport photo was perfect in seconds."</p>
-                    <p class="author">Emma T., USA</p>
-                </div>
-                <div class="review-card">
-                    <div class="stars">★★★★★</div>
-                    <p>"Super easy to use, and the AI background removal is spot-on!"</p>
-                    <p class="author">Liam R., UK</p>
-                </div>
-                <div class="review-card">
-                    <div class="stars">★★★★☆</div>
-                    <p>"Great for LinkedIn photos. The AI made my profile stand out."</p>
-                    <p class="author">Aisha K., India</p>
-                </div>
-            </div>
-        </section>
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
 
-        <!-- Pricing Section -->
-        <section class="pricing-section">
-            <h2>Choose Your Plan</h2>
-            <p>Unlock advanced AI features with our premium plans.</p>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Starter</h3>
-                    <div class="price">$49<span>/month</span></div>
-                    <ul class="features">
-                        <li>50 documents/month</li>
-                        <li>Basic AI optimization</li>
-                        <li>Standard formats</li>
-                        <li>Email support</li>
-                    </ul>
-                    <button class="btn primary-btn" onclick="selectPlan('starter')">Choose Starter</button>
-                </div>
-                <div class="pricing-card popular">
-                    <div class="popular-badge">Most Popular</div>
-                    <h3>Pro</h3>
-                    <div class="price">$299<span>/month</span></div>
-                    <ul class="features">
-                        <li>500 documents/month</li>
-                        <li>Advanced AI optimization</li>
-                        <li>GPT API integration</li>
-                        <li>Batch processing</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <button class="btn primary-btn" onclick="selectPlan('pro')">Choose Pro</button>
-                </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <div class="price">$499<span>/month</span></div>
-                    <ul class="features">
-                        <li>Unlimited documents</li>
-                        <li>Custom AI models</li>
-                        <li>Team collaboration</li>
-                        <li>API access</li>
-                        <li>24/7 support</li>
-                    </ul>
-                    <button class="btn primary-btn" onclick="selectPlan('enterprise')">Contact Sales</button>
-                </div>
-            </div>
-        </section>
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
 
-        <!-- Limit Reached Modal -->
-        <div class="modal" id="limitReachedModal">
-            <div class="modal-overlay" onclick="closeLimitModal()"></div>
-            <h2>🚀 Upgrade to Continue</h2>
-            <p>You've reached your free limit! Upgrade to process more documents.</p>
-            <div class="modal-grid">
-                <div class="pricing-card">
-                    <h3>Pro</h3>
-                    <div class="price">$299<span>/month</span></div>
-                    <ul class="features">
-                        <li>500 documents/month</li>
-                        <li>Advanced AI optimization</li>
-                        <li>GPT API integration</li>
-                        <li>Priority support</li>
-                    </ul>
-                    <button class="btn primary-btn" onclick="selectPlan('pro')">Upgrade Now</button>
-                </div>
-                <div class="pricing-card">
-                    <h3>Enterprise</h3>
-                    <div class="price">$499<span>/month</span></div>
-                    <ul class="features">
-                        <li>Unlimited documents</li>
-                        <li>Custom AI models</li>
-                        <li>API access</li>
-                        <li>24/7 support</li>
-                    </ul>
-                    <button class="btn primary-btn" onclick="selectPlan('enterprise')">Contact Sales</button>
-                </div>
-            </div>
-            <button class="btn secondary-btn" onclick="closeLimitModal()">Maybe Later</button>
-        </div>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-grid">
-                <div>
-                    <h4>About Document Pro</h4>
-                    <p>Document Pro uses AI to create professional photos and documents instantly.</p>
-                </div>
-                <div>
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#signIn">Sign In</a></li>
-                        <li><a href="/terms.html">Terms of Service</a></li>
-                        <li><a href="/privacy.html">Privacy Policy</a></li>
-                        <li><a href="/contact.html">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4>Contact</h4>
-                    <ul>
-                        <li>Email: support@documentpro.com</li>
-                        <li>Phone: +1-800-123-4567</li>
-                        <li><a href="https://twitter.com/documentpro">Twitter</a></li>
-                        <li><a href="https://facebook.com/documentpro">Facebook</a></li>
-                    </ul>
-                </div>
-            </div>
-            <p>© 2025 Document Pro. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script src="script.js"></script>
-</body>
-</html>
+    .modal-grid {
+        grid-template-columns: 1fr;
+    }
+}
