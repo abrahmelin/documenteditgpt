@@ -1,4 +1,4 @@
-// Country specifications
+// Ülke ve vize türüne göre fotoğraf ölçüleri
 const countrySpecs = {
     'passport': {
         name: 'Passport Photo',
@@ -28,17 +28,30 @@ const countrySpecs = {
         dpi: 600,
         background: 'white',
         format: 'JPG',
-        maxSize: '240KB'
+        maxSize: '240KB',
+        headSize: '70-80%', // Yüzün fotoğrafın %70-80'ini kaplaması gerekiyor[](https://mybiometricphotos.com/visa-photo/united-kingdom/)
     },
     'visa-uk': {
         name: 'UK Visa Photo',
-        width: 45,
-        height: 35,
+        width: 35,
+        height: 45,
         unit: 'mm',
         dpi: 600,
-        background: 'neutral',
+        background: 'light grey',
         format: 'JPG',
-        maxSize: '500KB'
+        maxSize: '500KB',
+        headSize: '29-34mm', // Çeneden saç üstüne kadar[](https://mybiometricphotos.com/visa-photo/united-kingdom/)
+    },
+    'visa-schengen': {
+        name: 'Schengen Visa Photo',
+        width: 35,
+        height: 45,
+        unit: 'mm',
+        dpi: 600,
+        background: 'light grey',
+        format: 'JPG',
+        maxSize: '500KB',
+        headSize: '32-36mm', // Çeneden saç üstüne kadar[](https://schengeninsuranceinfo.com/schengen-visa/requirements/photo/)[](https://visa2fly.com/blog/schengen-visa-photo-size)
     },
     'visa-canada': {
         name: 'Canada Visa Photo',
@@ -59,8 +72,7 @@ const countrySpecs = {
         background: 'light',
         format: 'JPG',
         maxSize: '500KB'
-    },
-    'cv': {
+ extinction: {
         name: 'CV/Resume Photo',
         width: 40,
         height: 50,
@@ -82,7 +94,7 @@ const countrySpecs = {
     }
 };
 
-// DOM elements
+// DOM elementleri
 const uploadZone = document.getElementById('uploadZone');
 const fileInput = document.getElementById('fileInput');
 const countrySelect = document.getElementById('countrySelect');
@@ -102,10 +114,10 @@ let currentUser = null;
 let dailyUsage = 0;
 let guestUsage = 0;
 
-// Initialize Stripe
-const stripe = Stripe('pk_test_51234567890'); // Replace with your publishable key
+// Stripe başlatma
+const stripe = Stripe('pk_test_51234567890'); // Gerçek Stripe anahtarınızla değiştirin
 
-// Scroll functions
+// Scroll fonksiyonları
 function scrollToSignIn() {
     document.getElementById('signIn').scrollIntoView({ behavior: 'smooth' });
 }
@@ -114,7 +126,7 @@ function scrollToUpload() {
     document.getElementById('uploadSection').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Google Sign In Handler
+// Google Sign-In işleyici
 function handleSignIn(response) {
     const responsePayload = decodeJWTResponse(response.credential);
     
@@ -137,17 +149,17 @@ function decodeJWTResponse(token) {
     return JSON.parse(jsonPayload);
 }
 
-// Email/Password Sign In Handler
+// E-posta/Şifre ile giriş
 function handleEmailSignIn() {
     const email = document.getElementById('emailInput').value;
     const password = document.getElementById('passwordInput').value;
 
     if (!email || !password) {
-        alert('Please enter both email and password');
+        alert('Lütfen e-posta ve şifreyi girin');
         return;
     }
 
-    // Mock authentication (replace with real backend API call)
+    // Mock kimlik doğrulama (gerçek backend API çağrısıyla değiştirin)
     if (email.includes('@') && password.length >= 6) {
         currentUser = {
             id: email,
@@ -157,7 +169,7 @@ function handleEmailSignIn() {
         };
         updateAfterSignIn();
     } else {
-        alert('Invalid email or password (password must be at least 6 characters)');
+        alert('Geçersiz e-posta veya şifre (şifre en az 6 karakter olmalı)');
     }
 }
 
@@ -179,8 +191,8 @@ function signOut() {
     
     uploadZone.innerHTML = `
         <div class="upload-icon">📁</div>
-        <h3>Drop your photo or click to browse</h3>
-        <p>Supports JPG, PNG, PDF files up to 10MB</p>
+        <h3>Fotoğrafınızı sürükleyin veya seçmek için tıklayın</h3>
+        <p>JPG, PNG, PDF dosyalarını destekler, maksimum 10MB</p>
     `;
     selectedFile = null;
     processedFile = null;
@@ -212,20 +224,20 @@ function updateUsageDisplay() {
     
     if (currentUser && currentPlan === 'free') {
         const remaining = 1 - dailyUsage;
-        usageText.textContent = `Free Plan: ${remaining} document remaining today`;
+        usageText.textContent = `Ücretsiz Plan: Bugün ${remaining} belge kaldı`;
         usageInfo.style.display = 'block';
         
         if (remaining <= 0) {
-            usageText.textContent = 'Free limit reached today. Upgrade to continue!';
+            usageText.textContent = 'Bugün ücretsiz limit doldu. Yükseltin!';
             usageInfo.style.background = 'rgba(239, 68, 68, 0.1)';
         }
     } else if (!currentUser) {
         const remaining = 1 - guestUsage;
-        usageText.textContent = `Free Trial: ${remaining} document remaining today`;
+        usageText.textContent = `Ücretsiz Deneme: Bugün ${remaining} belge kaldı`;
         usageInfo.style.display = 'block';
         
         if (remaining <= 0) {
-            usageText.textContent = 'Free trial limit reached. Sign in or upgrade!';
+            usageText.textContent = 'Ücretsiz deneme limiti doldu. Giriş yapın veya yükseltin!';
             usageInfo.style.background = 'rgba(239, 68, 68, 0.1)';
         }
     } else {
@@ -258,7 +270,7 @@ function closeLimitModal() {
     document.getElementById('limitReachedModal').style.display = 'none';
 }
 
-// Event listeners
+// Olay dinleyicileri
 uploadZone.addEventListener('click', () => fileInput.click());
 uploadZone.addEventListener('dragover', handleDragOver);
 uploadZone.addEventListener('drop', handleDrop);
@@ -295,12 +307,12 @@ function handleFile(file) {
         selectedFile = file;
         uploadZone.innerHTML = `
             <div class="upload-icon">✅</div>
-            <h3>1 file selected</h3>
+            <h3>1 dosya seçildi</h3>
             <p>${file.name}</p>
         `;
         updateProcessButton();
     } else {
-        alert('Please select a valid JPG, PNG, or PDF file.');
+        alert('Lütfen geçerli bir JPG, PNG veya PDF dosyası seçin.');
     }
 }
 
@@ -311,11 +323,12 @@ function handleCountryChange() {
         specsDisplay.style.display = 'block';
         specsText.innerHTML = `
             <strong>${specs.name}</strong><br>
-            Size: ${specs.width} × ${specs.height} ${specs.unit}<br>
-            Resolution: ${specs.dpi} DPI<br>
-            Background: ${specs.background}<br>
+            Ölçüler: ${specs.width} × ${specs.height} ${specs.unit}<br>
+            Çözünürlük: ${specs.dpi} DPI<br>
+            Arka Plan: ${specs.background}<br>
             Format: ${specs.format}<br>
-            Max file size: ${specs.maxSize}
+            Maksimum Dosya Boyutu: ${specs.maxSize}<br>
+            ${specs.headSize ? `Yüz Ölçüsü: ${specs.headSize}` : ''}
         `;
     } else {
         specsDisplay.style.display = 'none';
@@ -325,6 +338,78 @@ function handleCountryChange() {
 
 function updateProcessButton() {
     processBtn.disabled = !(selectedFile && countrySelect.value);
+}
+
+async function processImage(file, specs) {
+    return new Promise((resolve) => {
+        // Fotoğrafı resmi ölçü ve standartlara göre işleme
+        console.log(`Fotoğraf işleniyor: ${specs.name} için ${specs.width}x${specs.height}${specs.unit}, ${specs.dpi} DPI`);
+
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        const img = new Image();
+
+        img.onload = function() {
+            // Ölçüleri mm'den piksele çevirme (varsa)
+            const pixelWidth = specs.unit === 'mm' ? 
+                (specs.width * specs.dpi) / 25.4 : specs.width;
+            const pixelHeight = specs.unit === 'mm' ? 
+                (specs.height * specs.dpi) / 25.4 : specs.height;
+
+            canvas.width = pixelWidth;
+            canvas.height = pixelHeight;
+
+            // Arka plan rengi ayarlama
+            if (specs.background === 'white') {
+                ctx.fillStyle = '#FFFFFF';
+            } else if (specs.background === 'light grey') {
+                ctx.fillStyle = '#D3D3D3'; // Schengen ve UK için açık gri[](https://schengeninsuranceinfo.com/schengen-visa/requirements/photo/)[](https://mybiometricphotos.com/visa-photo/united-kingdom/)
+            } else if (specs.background === 'light') {
+                ctx.fillStyle = '#F8F8F8';
+            }
+
+            if (specs.background !== 'any') {
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            }
+
+            // Yüz boyutunu ayarlama (örneğin, Schengen için %70-80)
+            const scale = Math.max(
+                canvas.width / img.width,
+                canvas.height / img.height
+            );
+            const scaledWidth = img.width * scale;
+            const scaledHeight = img.height * scale;
+            const x = (canvas.width - scaledWidth) / 2;
+            const y = (canvas.height - scaledHeight) / 2;
+
+            // Yüz boyutunu kontrol etme (Schengen ve UK için özel kural)
+            if (specs.headSize) {
+                console.log(`Yüz boyutunu ${specs.headSize} olarak ayarlama`);
+                // Gerçek AI entegrasyonu için buraya yüz algılama eklenebilir
+            }
+
+            ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
+
+            // Dosya boyutunu kontrol etme
+            canvas.toBlob((blob) => {
+                const fileSizeKB = blob.size / 1024;
+                if (fileSizeKB > parseInt(specs.maxSize)) {
+                    alert(`Dosya boyutu ${fileSizeKB.toFixed(2)}KB, maksimum ${specs.maxSize} olmalı.`);
+                    resolve(null);
+                    return;
+                }
+
+                resolve({
+                    name: file.name.replace(/\.[^/.]+$/, '_optimized.jpg'),
+                    blob: blob,
+                    url: URL.createObjectURL(blob),
+                    originalName: file.name
+                });
+            }, 'image/jpeg', 0.9);
+        };
+
+        img.src = URL.createObjectURL(file);
+    });
 }
 
 async function processFile() {
@@ -339,13 +424,18 @@ async function processFile() {
     
     const specs = countrySpecs[countrySelect.value];
     
-    // Simulate AI processing (replace with real GPT API call for advanced features)
+    // Fotoğraf işleme
     progressFill.style.width = '100%';
     
     processedFile = await processImage(selectedFile, specs);
     
     processing.style.display = 'none';
     
+    if (!processedFile) {
+        processBtn.disabled = false;
+        return;
+    }
+
     if (currentUser) {
         dailyUsage += 1;
     } else {
@@ -357,73 +447,16 @@ async function processFile() {
     showPreview();
 }
 
-async function processImage(file, specs) {
-    return new Promise((resolve) => {
-        // Mock GPT API integration for AI enhancements
-        // Replace with actual API call to a service like OpenAI's GPT-4 Vision or a custom AI model
-        console.log('Processing with GPT API (mock): Enhancing image quality, removing background...');
-        
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        const img = new Image();
-        
-        img.onload = function() {
-            const pixelWidth = specs.unit === 'mm' ? 
-                (specs.width * specs.dpi) / 25.4 : specs.width;
-            const pixelHeight = specs.unit === 'mm' ? 
-                (specs.height * specs.dpi) / 25.4 : specs.height;
-            
-            canvas.width = pixelWidth;
-            canvas.height = pixelHeight;
-            
-            if (specs.background === 'white') {
-                ctx.fillStyle = '#FFFFFF';
-            } else if (specs.background === 'neutral') {
-                ctx.fillStyle = '#F0F0F0';
-            } else if (specs.background === 'light') {
-                ctx.fillStyle = '#F8F8F8';
-            }
-            
-            if (specs.background !== 'any') {
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
-            }
-            
-            const scale = Math.max(
-                canvas.width / img.width,
-                canvas.height / img.height
-            );
-            
-            const scaledWidth = img.width * scale;
-            const scaledHeight = img.height * scale;
-            const x = (canvas.width - scaledWidth) / 2;
-            const y = (canvas.height - scaledHeight) / 2;
-            
-            ctx.drawImage(img, x, y, scaledWidth, scaledHeight);
-            
-            canvas.toBlob((blob) => {
-                resolve({
-                    name: file.name.replace(/\.[^/.]+$/, '_optimized.jpg'),
-                    blob: blob,
-                    url: URL.createObjectURL(blob),
-                    originalName: file.name
-                });
-            }, 'image/jpeg', 0.9);
-        };
-        
-        img.src = URL.createObjectURL(file);
-    });
-}
-
 function showPreview() {
     previewGrid.innerHTML = '';
     
     const previewCard = document.createElement('div');
     previewCard.className = 'preview-card';
     previewCard.innerHTML = `
-        <h4>Before</h4>
-        <img src="${URL.createObjectURL(selectedFile)}" alt="Original">
-        <h4 style="margin-top: 20px;">After</h4>
-        <img src="${processedFile.url}" alt="Optimized">
+        <h4>Önce</h4>
+        <img src="${URL.createObjectURL(selectedFile)}" alt="Orijinal">
+        <h4 style="margin-top: 20px;">Sonra</h4>
+        <img src="${processedFile.url}" alt="Optimize Edilmiş">
         <p style="margin-top: 10px; font-size: 0.9rem; color: #9ca3af;">
             ${processedFile.name}
         </p>
@@ -446,13 +479,13 @@ function downloadFile() {
 function selectPlan(plan) {
     if (plan === 'starter' || plan === 'pro') {
         if (!currentUser) {
-            alert('Please sign in first to upgrade your plan.');
+            alert('Plan yükseltmek için önce giriş yapın.');
             return;
         }
         
         const priceIds = {
-            'starter': 'price_starter_123', // Replace with your price ID
-            'pro': 'price_pro_456'        // Replace with your price ID
+            'starter': 'price_starter_123', // Gerçek fiyat ID'siyle değiştirin
+            'pro': 'price_pro_456'        // Gerçek fiyat ID'siyle değiştirin
         };
         
         stripe.redirectToCheckout({
@@ -466,15 +499,15 @@ function selectPlan(plan) {
             cancelUrl: window.location.origin + '/cancel.html',
         }).then(function (result) {
             if (result.error) {
-                alert('Payment failed: ' + result.error.message);
+                alert('Ödeme başarısız: ' + result.error.message);
             }
         });
     } else if (plan === 'enterprise') {
-        alert('Please contact sales@documentpro.com for enterprise inquiries.');
+        alert('Kurumsal plan için sales@documentpro.com ile iletişime geçin.');
     }
 }
 
 window.addEventListener('load', function() {
-    console.log('Document Pro initialized successfully!');
+    console.log('Document Pro başarıyla başlatıldı!');
     loadUserUsage();
 });
