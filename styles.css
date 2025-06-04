@@ -25,7 +25,7 @@ body {
 }
 
 @keyframes scaleIn {
-    from { transform: scale(0.95); opacity: 0; }
+    from { transform: scale(0.9); opacity: 0; }
     to { transform: scale(1); opacity: 1; }
 }
 
@@ -60,7 +60,7 @@ body {
 
 /* Buttons */
 .btn {
-    background: linear-gradient(135deg, #10b981, #06b6d4);
+    background: linear-gradient(135deg, #14f195, #22d3ee);
     color: white;
     border: none;
     padding: 12px 32px;
@@ -73,11 +73,11 @@ body {
 
 .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 8px 16px rgba(20, 241, 149, 0.4);
 }
 
 .primary-btn {
-    background: linear-gradient(135deg, #10b981, #06b6d4);
+    background: linear-gradient(135deg, #14f195, #22d3ee);
 }
 
 .secondary-btn {
@@ -87,7 +87,7 @@ body {
 
 .secondary-btn:hover {
     background: #4b5563;
-    box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 8px 16px rgba(20, 241, 149, 0.3);
 }
 
 .btn:disabled {
@@ -126,7 +126,7 @@ body {
     background: #2d2d2d;
     padding: 20px;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0,0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.6s ease-out;
 }
 
@@ -147,8 +147,8 @@ body {
 
 .login-form input:focus {
     outline: none;
-    border-color: #10b981;
-    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    border-color: #14f195;
+    box-shadow: 0 0 0 2px rgba(20, 241, 149, 0.2);
 }
 
 .user-photo {
@@ -190,7 +190,7 @@ body {
 }
 
 .upload-zone {
-    border: 2px dashed #10b981;
+    border: 2px dashed #14f195;
     border-radius: 12px;
     padding: 40px 20px;
     cursor: pointer;
@@ -199,20 +199,20 @@ body {
 }
 
 .upload-zone:hover {
-    border-color: #06b6d4;
+    border-color: #22d3ee;
     background: #374151;
     transform: scale(1.02);
 }
 
 .upload-zone.dragover {
-    border-color: #06b6d4;
+    border-color: #22d3ee;
     background: #374151;
     transform: scale(1.02);
 }
 
 .upload-icon {
     font-size: 3rem;
-    color: #10b981;
+    color: #14f195;
     margin-bottom: 15px;
 }
 
@@ -234,8 +234,8 @@ select {
 
 select:focus {
     outline: none;
-    border-color: #10b981;
-    box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+    border-color: #14f195;
+    box-shadow: 0 0 0 2px rgba(20, 241, 149, 0.2);
 }
 
 .specs-display {
@@ -243,7 +243,7 @@ select:focus {
     padding: 20px;
     border-radius: 12px;
     margin: 20px 0;
-    border-left: 4px solid #10b981;
+    border-left: 4px solid #14f195;
     animation: fadeIn 0.6s ease-out;
 }
 
@@ -263,7 +263,7 @@ select:focus {
 
 .progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #10b981, #06b6d4);
+    background: linear-gradient(90deg, #14f195, #22d3ee);
     width: 0;
     transition: width 0.3s ease;
 }
@@ -365,12 +365,12 @@ select:focus {
 }
 
 .pricing-card:hover {
-    border-color: #10b981;
+    border-color: #14f195;
     transform: translateY(-5px);
 }
 
 .pricing-card.popular {
-    border-color: #10b981;
+    border-color: #14f195;
     transform: scale(1.05);
 }
 
@@ -379,7 +379,7 @@ select:focus {
     top: -10px;
     left: 50%;
     transform: translateX(-50%);
-    background: #10b981;
+    background: #14f195;
     color: white;
     padding: 6px 16px;
     border-radius: 12px;
@@ -390,7 +390,7 @@ select:focus {
 .price {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #10b981;
+    color: #14f195;
     margin: 10px 0;
 }
 
@@ -412,12 +412,12 @@ select:focus {
 
 .features li:before {
     content: "✓";
-    color: #10b981;
+    color: #14f195;
     font-weight: bold;
     margin-right: 10px;
 }
 
-/* Modal */
+/* Modal (Canlı ve Dikkat Çekici Tasarım) */
 .modal {
     display: none;
     position: fixed;
@@ -426,12 +426,12 @@ select:focus {
     transform: translate(-50%, -50%);
     z-index: 1000;
     max-width: 600px;
-    background: #1f1f1f;
+    background: #181818;
     border-radius: 16px;
     padding: 40px;
-    box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
-    animation: scaleIn 0.3s ease-out;
-    border: 1px solid #10b981;
+    box-shadow: 0 8px 24px rgba(20, 241, 149, 0.5);
+    animation: scaleIn 0.4s ease-out;
+    border: 2px solid #14f195;
 }
 
 .modal-overlay {
@@ -448,12 +448,14 @@ select:focus {
     color: #ffffff;
     font-size: 1.8rem;
     margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(20, 241, 149, 0.3);
 }
 
 .modal p {
-    color: #d1d5db;
+    color: #ffffff;
     font-size: 1rem;
     margin-bottom: 20px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 .modal-grid {
@@ -464,18 +466,46 @@ select:focus {
 }
 
 .modal .pricing-card {
-    background: #2d2d2d;
-    border: 1px solid #10b981;
-    transition: transform 0.3s ease;
+    background: #1f2937;
+    border: 1px solid #14f195;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .modal .pricing-card:hover {
     transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(20, 241, 149, 0.4);
+}
+
+.modal .pricing-card h3 {
+    color: #ffffff;
+}
+
+.modal .pricing-card .price {
+    color: #14f195;
+}
+
+.modal .pricing-card .features li {
+    color: #d1d5db;
+}
+
+.modal .pricing-card .features li:before {
+    color: #14f195;
 }
 
 .modal .btn {
     width: 100%;
     margin-top: 10px;
+}
+
+.modal .secondary-btn {
+    background: #374151;
+    color: #ffffff;
+    margin-top: 20px;
+}
+
+.modal .secondary-btn:hover {
+    background: #4b5563;
+    box-shadow: 0 8px 16px rgba(20, 241, 149, 0.3);
 }
 
 /* Footer */
@@ -514,7 +544,7 @@ select:focus {
 }
 
 .footer-grid ul li a:hover {
-    color: #10b981;
+    color: #14f195;
 }
 
 .footer p {

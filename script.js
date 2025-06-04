@@ -243,7 +243,7 @@ function updateUsageDisplay() {
     if (currentUser && currentUser.isAdmin) {
         usageText.textContent = 'Admin: Sınırsız Erişim';
         usageInfo.style.display = 'block';
-        usageInfo.style.background = 'rgba(16, 185, 129, 0.1)';
+        usageInfo.style.background = 'rgba(20, 241, 149, 0.1)';
     } else if (currentUser && currentPlan === 'free') {
         const remaining = 1 - dailyUsage;
         usageText.textContent = `Ücretsiz Plan: Bugün ${remaining} belge kaldı`;
@@ -501,8 +501,8 @@ function selectPlan(plan) {
         }
         
         const priceIds = {
-            'starter': 'price_starter_12345', // Gerçek fiyat ID'siyle değiştirin
-            'pro': 'price_pro_45678'        // Gerçek fiyat ID'siyle değiştirin
+            'starter': 'price_starter_12345',
+            'pro': 'price_pro_45678'
         };
         
         stripe.redirectToCheckout({
